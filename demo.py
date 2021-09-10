@@ -13,7 +13,7 @@ __author__ = 'xhrzg2017'
 
 import requests, telegram, time, parsel, re
 from datetime import datetime, timedelta, timezone
-from lxml import etree
+
 
 notes = ""
 
