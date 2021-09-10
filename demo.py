@@ -78,7 +78,7 @@ def tgbot(tg_token, tg_id):
         if bj_time.hour < 12:
             print('早报')
             name = '早'
-        elif bj_time.hour < 18:
+        elif bj_time.hour < 17:
             print('午报')
             name = '午'
         elif bj_time.hour < 23:
