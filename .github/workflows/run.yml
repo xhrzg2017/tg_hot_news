@@ -1,0 +1,64 @@
+name: TG_news_bot
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  watch:
+    types: started
+  schedule:
+    - cron: 0 10,22 * * *
+
+jobs:
+  TG_news_bot:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: 'setup python'
+      uses: actions/setup-python@master
+      with: 
+        python-version: 3.7
+      
+    - name: requirements
+      run: |
+        pip3 install -r requirements.txt
+        
+    - name: send
+      run: |
+        # Start send
+
+        tg="${{ secrets.TGID }}"
+        tg_list=()
+        for t in ${tg[*]}
+        do
+        tg_list[${#tg_list[*]}]=${t}
+        done
+
+        
+        tg_num=${#tg_list[*]}
+        if [ $tg_num != 1 ];then
+        echo "TGID缺失"
+        echo "----------"
+        echo "可以用@频道id"
+        echo "----------"
+        
+        else
+        echo "使用tg"
+        echo "----------"
+        r=`python3 demo.py <<EOF
+        ${tg}
+        EOF`
+        n='
+        '
+        n1="\n"
+        r=${r//${n}/${n1}}
+        echo -e "${r}"
+        y1='"'
+        y2='\"'
+        r=${r//${y1}/${y2}}
+        result="${result}\n${r}"
+        echo "----------"
+        fi
