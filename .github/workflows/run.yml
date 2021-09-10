@@ -8,7 +8,7 @@ on:
   watch:
     types: started
   schedule:
-    - cron: 0 10,22 * * *
+    - cron: 0 10,16,22 * * *
 
 jobs:
   TG_news_bot:
