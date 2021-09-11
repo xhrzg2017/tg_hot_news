@@ -11,20 +11,19 @@
 """
 __author__ = 'xhrzg2017'
 
-import requests, telegram, time, parsel, re
+import requests, telegram, time, parsel, re, json
 from datetime import datetime, timedelta, timezone
 
-
 notes = ""
-
 tg_id = input("TGid：")  # TG@userinfobot可查询id，不使用tg推送则github不填TGID 留空
-tg_token = '1984453979:AAHcMj_ctfgMnH3WvHFo0iZEspigSWLKY5k'  # 此值默认不用修改
+tg_token = input("tg_token：")  # TG@userinfobot可查询id，不使用tg推送则github不填TGID 留空
 
 
 # print(tg_id[:3] + '****' + tg_id[7:])
 
 def baidu():
     global notes
+
     print('百度热搜TOP 10')
     notes += '百度热搜TOP 10\n\n'
     TOP = 0
@@ -54,19 +53,46 @@ def baidu():
             TOP += 1
             # print('TOP' + str(TOP), title, href)
 
-            text = 'TOP ' + str(TOP) + '<a href="' + href + '">' + ' ' + title + '</a>' +"\n"
+            text = 'TOP ' + str(TOP) + '<a href="' + href + '">' + ' ' + title + '</a>' + "\n"
             notes += text
         else:
             TOP += 1
             # print('TOP'+str(TOP),title,href)
-
             text = 'TOP ' + str(TOP) + '<a href="' + href + '">' + ' ' + title + '</a>' + "\n"
             notes += text
     print(notes)
     tgbot(tg_token, tg_id)
 
 
-print(notes)
+def toutiao():
+    top = 0
+    global notes
+
+    print('今日头条热榜TOP 10')
+    notes += '今日头条热榜TOP 10\n\n'
+    headers = {
+
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36 Edg/93.0.961.44',
+    }
+    url = 'https://www.toutiao.com/hot-event/hot-board/?origin=toutiao_pc&'
+    response = requests.get(url=url, headers=headers)
+    response.encoding = 'utf-8'
+    # print(response.text)
+    title = re.findall('"Title":"(.*?)"', response.text)
+    url1 = re.findall('"Url":"(.*?)"', response.text)
+
+    for i in range(10):
+        url = url1[i]
+        top += 1
+        new_url = json.loads(f'"{url}"')
+        # print(title[i],new_url)
+        text = 'TOP ' + str(top) + '<a href="' + new_url + '">' + ' ' + title[i] + '</a>' + "\n"
+        notes += text
+    print(notes)
+    tgbot(tg_token, tg_id)
+
+
+
 # 使用tgbot推送
 def tgbot(tg_token, tg_id):
     if tg_id != '' and tg_token != '':
@@ -78,7 +104,6 @@ def tgbot(tg_token, tg_id):
         if bj_time.hour < 5:
             print('晨报')
             name = '晨'
-
         elif bj_time.hour < 12:
             print('早报')
             name = '早'
@@ -94,10 +119,13 @@ def tgbot(tg_token, tg_id):
                          parse_mode=telegram.ParseMode.HTML)
 
 
-
-
-
 if __name__ == '__main__':
     print("----------百度热搜开始尝试发送----------")
     baidu()
-    print("----------百度热搜执行完毕----------")
+    print("------------百度热搜执行完毕-----------")
+    print("------------清空变量执行完毕-----------")
+    notes =' '
+    print("------------清空变量执行完毕-----------")
+    print("----------头条热搜开始尝试发送----------")
+    toutiao()
+    print("------------头条热搜执行完毕-----------")
