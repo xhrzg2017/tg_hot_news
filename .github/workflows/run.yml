@@ -36,6 +36,13 @@ jobs:
         do
         tg_list[${#tg_list[*]}]=${t}
         done
+        
+        tgt="${{ secrets.TGt }}"
+        tgt_list=()
+        for i in ${tgt[*]}
+        do
+        tgt_list[${#tgt_list[*]}]=${i}
+        done
 
         
         tg_num=${#tg_list[*]}
@@ -50,6 +57,7 @@ jobs:
         echo "----------"
         r=`python3 demo.py <<EOF
         ${tg}
+        ${tgt}
         EOF`
         n='
         '
