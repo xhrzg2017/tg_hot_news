@@ -75,7 +75,7 @@ def tgbot(tg_token, tg_id):
         utc_dt = datetime.utcnow().replace(tzinfo=timezone.utc)
         time = utc_dt.astimezone(timezone(timedelta(hours=8))).strftime('%Y-%m-%d %H:%M')
         bj_time = utc_dt.astimezone(timezone(timedelta(hours=8)))
-                if bj_time.hour < 5:
+        if bj_time.hour < 5:
             print('晨报')
             name = '晨'
 
