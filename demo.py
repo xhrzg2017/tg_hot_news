@@ -75,7 +75,11 @@ def tgbot(tg_token, tg_id):
         utc_dt = datetime.utcnow().replace(tzinfo=timezone.utc)
         time = utc_dt.astimezone(timezone(timedelta(hours=8))).strftime('%Y-%m-%d %H:%M')
         bj_time = utc_dt.astimezone(timezone(timedelta(hours=8)))
-        if bj_time.hour < 12:
+                if bj_time.hour < 5:
+            print('晨报')
+            name = '晨'
+
+        elif bj_time.hour < 12:
             print('早报')
             name = '早'
         elif bj_time.hour < 17:
@@ -84,9 +88,6 @@ def tgbot(tg_token, tg_id):
         elif bj_time.hour < 23:
             print('晚报')
             name = '晚'
-        elif bj_time.hour < 5:
-            print('晨报')
-            name = '晨'
 
         bot.send_message(chat_id=tg_id,
                          text=f'🎉网络热搜{name}报🎉：\n\n' + notes + '\n' + time + '\n\n' + '本消息由TGbot项目定时发送 \n https://github.com/xhrzg2017/tg_hot_news',
