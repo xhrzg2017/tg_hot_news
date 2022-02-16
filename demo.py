@@ -15,8 +15,8 @@ import requests, telegram, time, parsel, re, json
 from datetime import datetime, timedelta, timezone
 
 notes = ""
-tg_id = input("TGid：")  # TG@userinfobot可查询id，不使用tg推送则github不填TGID 留空
-tg_token = input("tg_token：")  # TG@userinfobot可查询id，不使用tg推送则github不填TGID 留空
+tg_id = input("TGid：")  # TG@userinfobot可查询id，
+tg_token = input("tg_token：")  # TG@BotFather可查询机器人token，
 
 
 # print(tg_id[:3] + '****' + tg_id[7:])
@@ -60,7 +60,7 @@ def baidu():
             # print('TOP'+str(TOP),title,href)
             text = 'TOP ' + str(TOP) + '<a href="' + href + '">' + ' ' + title + '</a>' + "\n"
             notes += text
-    print(notes)
+    #print(notes)
     tgbot(tg_token, tg_id)
 
 
@@ -88,7 +88,7 @@ def toutiao():
         # print(title[i],new_url)
         text = 'TOP ' + str(top) + '<a href="' + new_url + '">' + ' ' + title[i] + '</a>' + "\n"
         notes += text
-    print(notes)
+    #print(notes)
     tgbot(tg_token, tg_id)
 
 
