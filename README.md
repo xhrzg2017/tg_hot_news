@@ -33,7 +33,7 @@ TG@BotFather开通<br>
 ## 四、查看运行结果
 Actions > TG_news_bot> build  
 能看到如下图所示，表示成功  
-![](https://img30.360buyimg.com/pop/jfs/t1/88443/21/22664/2624/620c5692E2fe41b11/a61520d67193455d.png)
+![](https://img30.360buyimg.com/pop/jfs/t1/216934/12/12298/6124/620c59d5E8d0a2969/a0bb80d75060fddc.png)
 
 此后，将会在每天早晚6:00、12:00开始发送（github当时不一定有机器）
 若有需求，可以在[.github/workflows/run.yml]中自行修改
