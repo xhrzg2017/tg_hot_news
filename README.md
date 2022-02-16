@@ -1,5 +1,5 @@
 # tg_hot_news
-一个能定时发送网络热搜的机器人
+一个能定时发送网络热搜的机器人<br>
 效果 https://t.me/github_hot_news<br>
 ![](https://img30.360buyimg.com/pop/jfs/t1/213833/36/12552/294080/620c576dEf5451178/9fc46b3ee011d9d7.png)
 
