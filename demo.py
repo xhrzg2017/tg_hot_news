@@ -116,7 +116,7 @@ def tgbot(tg_token, tg_id):
 
         bot.send_message(chat_id=tg_id,
                          text=f'🎉网络热搜{name}报🎉：\n\n' + notes + '\n' + time + '\n\n' + '本消息由TGbot项目定时发送 \n https://github.com/xhrzg2017/tg_hot_news',
-                         parse_mode=telegram.ParseMode.HTML)
+                         parse_mode=ParseMode.HTML)
 
 
 if __name__ == '__main__':
